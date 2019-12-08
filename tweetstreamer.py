@@ -68,7 +68,7 @@ class StdOutListener(StreamListener):
 							tf.write("Failed to write tweet\n")
 				else:
 					print("Retweet detected and skipped")
-			except:
+			except AttributeError as e:
 				print("@"+user+": "+text)
 				engine.say("New tweet from "+user)
 				engine.say(text)
@@ -82,8 +82,7 @@ class StdOutListener(StreamListener):
 						tf.write("Failed to write tweet\n")
 			return True
 		except:
-			sys.exit() #ends the try block via a keyboard interruption
-		return True #streaming stops when it returns False; however, we want it to go forever (or until user stops it)
+			return False
 
 	def on_error(self, status):
 		print(status)
@@ -117,6 +116,9 @@ def main():
 				tf.write("]")
 			tf.write("\n")
 		streamer.stream_tweets(filename, taglist, mode) #start streaming
+		with open(filename, 'a') as tf:
+			tf.write("Disconnecting\n\n")
+		print("Disconnecting")
 
 	#Shutdown if stream is interrupted or on a weird error
 	except:

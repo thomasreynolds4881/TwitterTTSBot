@@ -1,4 +1,4 @@
-A Twitter bot that fetches tweets via keyword or account number, and then reads them out via Text-To-Speech. This is one of my first attempts at a project on my own; if you have any feedback feel free to send me a message on reddit (u/CustomCuber).
+A Twitter bot that fetches tweets via keyword or account number, and then reads them out via Text-To-Speech. This is one of my first attempts at a solo project; if you have any feedback feel free to send me a message on reddit (u/CustomCuber).
 
 # Files
 * tweetreader.py: runs the tweet streamer

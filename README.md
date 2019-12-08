@@ -15,6 +15,6 @@ A Twitter bot that fetches tweets via keyword or account number, and then reads 
 * [Status Objects](https://gist.github.com/dev-techmoe/ef676cdd03ac47ac503e856282077bf2) -- easier to navigate than the documentation
 
 # Future Ideas
-* **Allow inputing account names instead of account IDs**
-* Throw it onto a Raspberry Pi with a speaker, stream a junk Twitter in the config, and use it as a mini-Alexa in my dorm room
-* Implement sentiment analysis
+- [x] Allow inputing account names instead of account IDs
+- [ ] Throw it onto a Raspberry Pi with a speaker, stream a junk Twitter in the config, and use it as a mini-Alexa in my dorm room
+- [ ] Implement sentiment analysis

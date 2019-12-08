@@ -33,28 +33,38 @@ class StdOutListener(StreamListener):
 		retweets = config.show_retweets
 		try:
 			tweet = json.loads(data)
-			text = json.dumps(tweet['text'])
+			text = json.dumps(tweet['text'],ensure_ascii=False)
 			engine = pyttsx3.init()
 			if (text):
 				try:
 					json.dumps(tweet['retweeted_status'])
 					if (retweets == True):
 						text = text[4:]
+						text = text.replace("\\n","")
 						print(text)
 						say = "New retweeted post from"+text
 						engine.say(say)
 						engine.runAndWait()
-						with open(self.filename, 'a') as tf:
-							tf.write(text+"\n")
+						try:
+							with open(self.filename, 'a') as tf:
+								json.dump(text+"\n", tf)
+						except:
+							with open(self.filename, 'a') as tf:
+								tf.write("Failed to write tweet\n")
 					else:
 						print("Retweet detected and skipped")
 				except:
+					text = text.replace("\\n","")
 					print(text)
 					engine.say("New tweet:")
 					engine.say(text)
 					engine.runAndWait()
-					with open(self.filename, 'a') as tf:
-						tf.write(text+"\n")
+					try:
+						with open(self.filename, 'a') as tf:
+							json.dump(text+"\n", tf)
+					except:
+						with open(self.filename, 'a') as tf:
+							tf.write("Failed to write tweet\n")
 			return True
 		except:
 			sys.exit()

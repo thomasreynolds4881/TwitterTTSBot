@@ -2,11 +2,11 @@ A Twitter bot that fetches tweets via keyword or account number, and then reads 
 
 # Usage
 To run tweetreader.py, keys.py must be given authentication keys from a new Twitter app (if you don't know how, try [this](https://projects.raspberrypi.org/en/projects/getting-started-with-the-twitter-api). Next, download the following modules:
-'''
+```
 pip install tweepy
 pip install pyttsx3
 pip install pypiwin32
-'''
+```
 After this, set up with preferences in config.py and you should be good to go.
 
 # Files

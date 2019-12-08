@@ -34,16 +34,17 @@ class StdOutListener(StreamListener):
 		try:
 			tweet = json.loads(data)
 			text = json.dumps(tweet['text'],ensure_ascii=False)
+			user = json.dumps(tweet['user']['screen_name'],ensure_ascii=False)
 			engine = pyttsx3.init()
 			if (text):
 				try:
 					json.dumps(tweet['retweeted_status'])
 					if (retweets == True):
-						text = text[4:]
+						#text = text[4:]
 						text = text.replace("\\n","")
-						print(text)
-						say = "New retweeted post from"+text
-						engine.say(say)
+						print("@"+user[1:-1]+": "+text[1:-1])
+						engine.say("New retweeted post from"+user)
+						engine.say(text)
 						engine.runAndWait()
 						try:
 							with open(self.filename, 'a') as tf:
@@ -55,8 +56,8 @@ class StdOutListener(StreamListener):
 						print("Retweet detected and skipped")
 				except:
 					text = text.replace("\\n","")
-					print(text)
-					engine.say("New tweet:")
+					print("@"+user[1:-1]+": "+text[1:-1])
+					engine.say("New tweet from "+user)
 					engine.say(text)
 					engine.runAndWait()
 					try:

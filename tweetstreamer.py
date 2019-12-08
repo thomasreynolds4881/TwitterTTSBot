@@ -15,11 +15,13 @@ class TwitterStreamer():
 		pass
 
 	def stream_tweets(self, filename, taglist, mode):
+		#authenticate
 		auth = OAuthHandler(keys.ACCESS_TOKEN, keys.ACCESS_TOKEN_SECRET)
 		auth.set_access_token(keys.CONSUMER_KEY, keys.CONSUMER_SECRET)
 		api = tweepy.API(auth)
 		listener = StdOutListener(filename, api)
 		
+		#define a new Stream object; track is used for keyword search, follow for username search
 		stream = Stream(auth, listener)
 		if (mode == 1):
 			stream.filter(track=taglist)
@@ -38,15 +40,17 @@ class StdOutListener(StreamListener):
 			
 	def on_status(self, status):
 		try:
+			#determine if regular or extended tweet
 			try:
 				text = status.extended_tweet['full_text']
 			except:
 				text = status.text
+
 			user = status.user.screen_name
 			retweets = config.show_retweets
-			engine = pyttsx3.init()
+			engine = pyttsx3.init() #initialize TTS
 			try:
-				status.retweeted_status
+				status.retweeted_status #check if status has retweeted_status; therefore, it's a retweet
 				if (retweets == True):
 					print("@"+user+": "+text)
 					engine.say("New retweet from"+user)
@@ -75,8 +79,8 @@ class StdOutListener(StreamListener):
 						tf.write("Failed to write tweet\n")
 			return True
 		except:
-			sys.exit()
-		return True
+			sys.exit() #ends the try block via a keyboard interruption
+		return True #streaming stops when it returns False; however, we want it to go forever (or until user stops it)
 
 	def on_error(self, status):
 		print(status)
@@ -95,7 +99,9 @@ def main():
 		print("Error in config.py: mode doesn't exist")
 		sys.exit()
 
-	streamer = TwitterStreamer()
+	streamer = TwitterStreamer() #create a new streamer
+
+	#Attempt to start and continue the twitter stream
 	try:
 		logdate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 		print("Stream started:",logdate)
@@ -107,10 +113,15 @@ def main():
 				tf.write(i)
 				tf.write("]")
 			tf.write("\n")
-		streamer.stream_tweets(filename, taglist, mode)
+		streamer.stream_tweets(filename, taglist, mode) #start streaming
+
+	#Shutdown if stream is interrupted or on a weird error
 	except:
+		with open(filename, 'a') as tf:
+			tf.write("Disconnecting\n\n")
+		print("Disconnecting")
 		engine = pyttsx3.init()
-		engine.say("Critical error: halting program")
+		engine.say("Shutting down")
 		engine.runAndWait()
 		sys.exit()
 

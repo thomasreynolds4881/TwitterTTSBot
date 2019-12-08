@@ -1,5 +1,14 @@
 A Twitter bot that fetches tweets via keyword or account number, and then reads them out via Text-To-Speech. This is one of my first attempts at a solo project; if you have any feedback feel free to send me a message on reddit (u/CustomCuber).
 
+# Usage
+To run tweetreader.py, keys.py must be given authentication keys from a new Twitter app (if you don't know how, try [this](https://projects.raspberrypi.org/en/projects/getting-started-with-the-twitter-api). Next, download the following modules:
+'''
+pip install tweepy
+pip install pyttsx3
+pip install pypiwin32
+'''
+After this, set up with preferences in config.py and you should be good to go.
+
 # Files
 * tweetreader.py: runs the tweet streamer
 * config.py: used to change streaming settings

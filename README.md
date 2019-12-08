@@ -1,5 +1,5 @@
 # TwitterTTS
-A program that fetches tweets by using a list of keywords or screen names and then vocalizes them with Text-To-Speech. If you have any feedback feel free to send me a message on reddit (u/CustomCuber).
+A program that fetches tweets by using a list of keywords or screen names and then vocalizes them with text-to-speech. If you have any feedback feel free to send me a message on reddit (u/CustomCuber).
 
 ## Usage
 To run tweetreader.py, keys.py must be given authentication keys from a new Twitter app (if you don't know how, try [this](https://projects.raspberrypi.org/en/projects/getting-started-with-the-twitter-api). Next, download the following modules:

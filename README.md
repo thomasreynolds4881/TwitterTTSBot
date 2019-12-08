@@ -13,7 +13,6 @@ After this, set up with preferences in config.py and you should be good to go.
 * tweetreader.py: runs the tweet streamer
 * config.py: used to change streaming settings
 * keys.py: location to put Twitter app access keys
-* tweetlog.json: log file
 
 # Libraries
 * Tweepy: streams tweets

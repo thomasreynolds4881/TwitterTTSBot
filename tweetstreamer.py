@@ -26,7 +26,10 @@ class TwitterStreamer():
 		if (mode == 1):
 			stream.filter(track=taglist)
 		else:
-			stream.filter(follow=taglist)
+			userlist = []
+			for i in taglist:
+				userlist.append(str(api.get_user(screen_name = i).id)) #convert screenname into ID
+			stream.filter(follow=userlist)
 
 class StdOutListener(StreamListener):
 

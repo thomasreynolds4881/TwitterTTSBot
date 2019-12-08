@@ -1,5 +1,5 @@
 # TwitterTTS
-A program that fetches tweets via keyword or screen name and then reads them via Text-To-Speech. If you have any feedback feel free to send me a message on reddit (u/CustomCuber).
+A program that fetches tweets by using a list of keywords or screen names and then vocalizes them with Text-To-Speech. If you have any feedback feel free to send me a message on reddit (u/CustomCuber).
 
 ## Usage
 To run tweetreader.py, keys.py must be given authentication keys from a new Twitter app (if you don't know how, try [this](https://projects.raspberrypi.org/en/projects/getting-started-with-the-twitter-api). Next, download the following modules:
@@ -24,6 +24,7 @@ After this, set up with preferences in config.py and you should be good to go.
 * [Status Objects](https://gist.github.com/dev-techmoe/ef676cdd03ac47ac503e856282077bf2) -- easier to navigate than the documentation
 
 ## Future Ideas
-- [x] Allow inputing account names instead of account IDs
+- [x] Allow inputing screen names instead of account IDs
+- [ ] Allow using screen names and search terms in a single filter
 - [ ] Throw it onto a Raspberry Pi with a speaker, stream a junk Twitter in the config, and use it as a mini-Alexa in my dorm room
 - [ ] Implement sentiment analysis

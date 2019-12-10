@@ -23,13 +23,16 @@ class TwitterStreamer():
 		
 		#define a new Stream object; track is used for keyword search, follow for username search
 		stream = Stream(auth, listener)
-		if (mode == 1):
-			stream.filter(track=taglist)
-		else:
+		if (mode == 0):
 			userlist = []
 			for i in taglist:
 				userlist.append(str(api.get_user(screen_name = i).id)) #convert screenname into ID
 			stream.filter(follow=userlist)
+		elif (mode == 1):
+			stream.filter(track=taglist)
+		else: #if mode == 2
+			stream.filter(locations=taglist)
+
 
 class StdOutListener(StreamListener):
 
@@ -69,7 +72,11 @@ class StdOutListener(StreamListener):
 				else:
 					print("Retweet detected and skipped")
 			except AttributeError as e:
-				print("@"+user+": "+text)
+				try:
+					print("@"+user+" ("+status.place.name+"): "+text)
+				except:
+					print("@"+user+": "+text)
+				
 				engine.say("New tweet from "+user)
 				engine.say(text)
 				engine.runAndWait()
@@ -97,6 +104,9 @@ def main():
 	elif (mode == 1):
 		print("Using mode 1: filtering by phrase list")
 		taglist = config.phrase_list #for a word
+	elif (mode == 2):
+		print("Using mode 2: filtering by location")
+		taglist = config.location_list #for a location
 	else:
 		print("Error in config.py: mode doesn't exist")
 		sys.exit()
@@ -112,7 +122,7 @@ def main():
 			tf.write("taglist: ")
 			for i in taglist:
 				tf.write("[")
-				tf.write(i)
+				tf.write(str(i))
 				tf.write("]")
 			tf.write("\n")
 		streamer.stream_tweets(filename, taglist, mode) #start streaming
